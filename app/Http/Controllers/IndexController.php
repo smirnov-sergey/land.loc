@@ -9,15 +9,19 @@ use App\Page;
 use App\Service;
 use App\Portfolio;
 use App\People;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
     public function execute(Request $request)
     {
         $pages = Page::all();
-        $portfolios = Portfolio::get('name', 'filter', 'images');
+        $portfolios = Portfolio::get(['name', 'filter', 'images']);
         $services = Service::where('id', '<', 20)->get();
         $peoples = People::take(3)->get();
+
+        // фильтры для Portfolio
+        $tags = DB::table('portfolios')->distinct()->lists('filter');
 
         // меню для header
         $menu = [];
@@ -48,6 +52,7 @@ class IndexController extends Controller
             'services' => $services,
             'portfolios' => $portfolios,
             'peoples' => $peoples,
+            'tags' => $tags
         ));
     }
 }
