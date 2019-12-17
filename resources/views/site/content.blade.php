@@ -8,7 +8,6 @@
                             <div class="row">
                                 <div class="col-lg-5 col-sm-7">
                                     <div class="top_left_cont zoomIn wow animated">
-                                        <h2>We create <strong>awesome</strong> web templates</h2>
                                         {!! $page->text !!}
                                         <a href="{{ route('page', array('alias' => $page->alias)) }}"
                                            class="read_more2">Read more</a></div>
@@ -230,23 +229,28 @@
                 </div>
                 <div class="col-lg-8 wow fadeInLeft delay-06s">
                     <div class="form">
-                        <input class="input-text" type="text" name="" value="Your Name *"
-                               onFocus="if(this.value==this.defaultValue)this.value='';"
-                               onBlur="if(this.value=='')this.value=this.defaultValue;">
-                        <input class="input-text" type="text" name="" value="Your E-mail *"
-                               onFocus="if(this.value==this.defaultValue)this.value='';"
-                               onBlur="if(this.value=='')this.value=this.defaultValue;">
-                        <textarea class="input-text text-area" cols="0" rows="0"
-                                  onFocus="if(this.value==this.defaultValue)this.value='';"
-                                  onBlur="if(this.value=='')this.value=this.defaultValue;">Your Message *</textarea>
-                        <input class="input-btn" type="submit" value="send message">
+
+                        <form action="{{ route('home') }}" method="post">
+
+                            <input class="input-text" type="text" name="name" value="Name *"
+                                   onFocus="if(this.value==this.defaultValue)this.value='';"
+                                   onBlur="if(this.value=='')this.value=this.defaultValue;">
+                            <input class="input-text" type="text" name="email" value="E-mail *"
+                                   onFocus="if(this.value==this.defaultValue)this.value='';"
+                                   onBlur="if(this.value=='')this.value=this.defaultValue;">
+                            <textarea name="text" class="input-text text-area" cols="0" rows="0"
+                                      onFocus="if(this.value==this.defaultValue)this.value='';"
+                                      onBlur="if(this.value=='')this.value=this.defaultValue;">Message *</textarea>
+                            <input class="input-btn" type="submit" value="send message">
+
+                            {{ csrf_field() }}
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
     </div>
     <div class="container">
-        <div class="footer_bottom"><span>Copyright � 2014,    Template by <a
-                        href="http://webthemez.com">WebThemez.com</a>. </span></div>
+        <div class="footer_bottom">Copyright 2019</div>
     </div>
 </footer>
