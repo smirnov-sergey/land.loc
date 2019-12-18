@@ -13,6 +13,15 @@ class PagesEditController extends Controller
     public function execute(Page $page, Request $request)
     {
 
+        // удаление данных
+        if ($request->isMethod('delete')) {
+
+            $page->delete();
+
+            return redirect('admin')->with('status', 'Страница удалена');
+        }
+
+        // обновление данных
         if ($request->isMethod('post')) {
 
             $input = $request->except('_token');
@@ -46,10 +55,9 @@ class PagesEditController extends Controller
 
             if ($page->update()) {
 
-                return redirect('admin')->with('status', 'Страница изменена');
+                return redirect('admin')->with('status', 'Страница обновлена');
             }
         }
-
 
         $old = $page->toArray();
 
@@ -62,8 +70,5 @@ class PagesEditController extends Controller
 
             return view('admin.pages_edit', $data);
         }
-
-
     }
-
 }
